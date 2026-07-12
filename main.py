@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 # from fastapi.params import Body 
 import schemas
 import models
-from database import engine, getDB
+from database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import List
+from scrapers.scraper_g1 import raspar_noticias_g1
+import crud
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -25,9 +27,10 @@ app.add_middleware(
 async def root():
     return{"message": "Hello World"}
 
-@app.get("/noticias")
-def listar_noticias():
-    return []
+@app.get("/api/noticias")
+def listar_noticias(db: Session = Depends(get_db)):
+    noticias_encontradas = crud.buscar_noticias(db)
+    return noticias_encontradas
 
 @app.get("/vagas")
 def listar_vagas():
