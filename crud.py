@@ -22,5 +22,22 @@ def salvar_noticias_no_banco(lista_de_noticias_extraidas, db: Session):
 
 def buscar_noticias(db: Session):
     busca_completa_de_noticias = db.query(models.Noticia).all()
-
+    
     return busca_completa_de_noticias
+
+def salvar_talentos_no_banco(lista_de_talentos, db: Session):
+    for talento in lista_de_talentos:
+        talento_validado = schemas.TalentoBase(**talento)
+
+        novo_talento = models.Talento(
+            nome=talento_validado.nome,
+            especialidade=talento_validado.especialidade,
+            habilidades=talento_validado.habilidades,
+            avaliacao=talento_validado.avaliacao,
+            preco_hora=talento_validado.preco_hora
+        )
+        db.add(novo_talento)
+    db.commit()
+
+def buscar_talentos(db: Session):
+    return db.query(models.Talento).all()

@@ -7,6 +7,7 @@ from database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import List
 from scrapers.scraper_g1 import raspar_noticias_g1
+from scrapers.workana import buscar_talentos
 import crud
 
 models.Base.metadata.create_all(bind=engine)
@@ -37,5 +38,12 @@ def listar_vagas():
     return []
 
 @app.get("/talentos")
-def listar_talentos():
-    return []
+def listar_talentos(db: Session = Depends(get_db)):
+    return crud.buscar_talentos(db)
+
+@app.post("/talentos/atualizar")
+def atualizar_talentos(db: Session = Depends(get_db)):
+    dados = buscar_talentos()
+    crud.salvar_talentos_no_banco(dados, db)
+
+    return {"mensagem": "Talentos atualizados"}

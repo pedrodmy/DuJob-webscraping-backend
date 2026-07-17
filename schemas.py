@@ -5,7 +5,7 @@ class NoticiaBase(BaseModel):
     resumo: str
     tempo_publicacao: str
     link: str
-class NoticiaCreate(NoticiaBase):  pass
+class NoticiaCreate(NoticiaBase): pass
 class Noticia(NoticiaBase):
     id: int
     class Config:
