@@ -10,6 +10,8 @@ class Noticia(Base):
     resumo = Column(Text, nullable=False)
     tempo_publicacao = Column(String(100))
     link = Column(String(500), nullable=False)
+    secao_de_publicacao = Column(String(100))
+    imagem_da_noticia = Column(String(500))
 
 
 class Vaga(Base):

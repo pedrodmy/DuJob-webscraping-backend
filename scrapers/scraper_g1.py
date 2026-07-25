@@ -52,7 +52,7 @@ def raspar_noticias_g1():
             nova_noticia = {
                 "titulo": titulo_noticia_limpo,
                 "link": link_da_noticia,
-                "tempo_de_publicacao": tempo_limpo,
+                "tempo_publicacao": tempo_limpo,
                 "secao_de_publicacao": secao_limpa,
                 "resumo": resumo_limpo,
                 "imagem_da_noticia": imagem_limpa

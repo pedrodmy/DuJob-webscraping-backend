@@ -5,6 +5,8 @@ class NoticiaBase(BaseModel):
     resumo: str
     tempo_publicacao: str
     link: str
+    secao_de_publicacao: str
+    imagem_da_noticia: str
 class NoticiaCreate(NoticiaBase): pass
 class Noticia(NoticiaBase):
     id: int
