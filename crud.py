@@ -3,7 +3,7 @@ import models
 import schemas
 
 def salvar_noticias_no_banco(lista_de_noticias_extraidas, db: Session):
-    for noticia in lista_de_noticias_extraidas:
+    for noticia in reversed(lista_de_noticias_extraidas):
         noticia_validada = schemas.NoticiaBase(**noticia)
 
         noticia_existente = db.query(models.Noticia).filter(models.Noticia.link == noticia_validada.link).first()
@@ -24,7 +24,7 @@ def salvar_noticias_no_banco(lista_de_noticias_extraidas, db: Session):
     db.commit()
 
 def buscar_noticias(db: Session):
-    busca_completa_de_noticias = db.query(models.Noticia).all()
+    busca_completa_de_noticias = db.query(models.Noticia).order_by(models.Noticia.id.desc()).limit(12).all()
     
     return busca_completa_de_noticias
 
