@@ -35,3 +35,4 @@ class Talento(Base):
     habilidades = Column(Text)
     avaliacao = Column(Float)
     preco_hora = Column(Float)
+    link = Column(String, nullable=True)

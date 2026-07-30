@@ -1,4 +1,5 @@
 from pydantic import BaseModel 
+from typing import Optional
 
 class NoticiaBase(BaseModel):
     titulo: str
@@ -17,10 +18,10 @@ class Noticia(NoticiaBase):
 class VagaBase(BaseModel):
     titulo: str
     empresa: str
-    localizacao: str
-    salario: str
-    descricao: str
-    link_original: str
+    localizacao: Optional[str] = None # 🔹 Agora aceita Nulo
+    salario: Optional[str] = None     # 🔹 Agora aceita Nulo
+    descricao: Optional[str] = None
+    link_original: Optional[str] = None
 
 class VagaCreate(VagaBase): pass
 class Vaga(VagaBase):
@@ -31,12 +32,11 @@ class Vaga(VagaBase):
 
 class TalentoBase(BaseModel):
     nome: str
-    especialidade: str
-    habilidades: str
-    avaliacao: float
-    preco_hora: float
-class TalentoCreate(TalentoBase): pass
-class Talento(TalentoBase):
-    id: int
+    especialidade: Optional[str] = None
+    habilidades: Optional[str] = None
+    avaliacao: Optional[float] = None
+    preco_hora: Optional[float] = None
+    link: Optional[str] = None
+
     class Config:
         from_attributes = True
